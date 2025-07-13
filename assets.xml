@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Assets>
+    <!-- Commodities: Physical commodities (futures and ETFs) -->
+    <AssetClass name="Commodities">
+        <Future>
+            <Name>Gold</Name>
+            <Ticker>GC=F</Ticker>
+        </Future>
+        <Future>
+            <Name>Silver</Name>
+            <Ticker>SI=F</Ticker>
+        </Future>
+        <Future>
+            <Name>Crude Oil</Name>
+            <Ticker>CL=F</Ticker>
+        </Future>
+        <Future>
+            <Name>Natural Gas</Name>
+            <Ticker>NG=F</Ticker>
+        </Future>
+        <Future>
+            <Name>Copper</Name>
+            <Ticker>HG=F</Ticker>
+        </Future>
+        <Future>
+            <Name>RBOB Gasoline</Name>
+            <Ticker>RB=F</Ticker>
+        </Future>
+        <Future>
+            <Name>Corn</Name>
+            <Ticker>ZC=F</Ticker>
+        </Future>
+        <Future>
+            <Name>Cocoa</Name>
+            <Ticker>CC=F</Ticker>
+        </Future>
+        <Etf>
+            <Name>SPDR Gold Shares</Name>
+            <Ticker>GLD</Ticker>
+        </Etf>
+        <Etf>
+            <Name>VanEck Gold Miners ETF</Name>
+            <Ticker>GDX</Ticker>
+        </Etf>
+        <Etf>
+            <Name>Invesco Optimum Yield Diversified Commodity Strategy No K-1 ETF</Name>
+            <Ticker>PDBC</Ticker>
+        </Etf>
+        <!-- Removed duplicate PDBC with incorrect ticker XLB -->
+    </AssetClass>
+
+    <!-- Equities: Equity index futures, ETFs, and indices -->
+    <AssetClass name="Equities">
+        <Future>
+            <Name>E-Mini SP 500</Name>
+            <Ticker>ES=F</Ticker>
+        </Future>
+        <Future>
+            <Name>Mini Dow Jones Industrials</Name>
+            <Ticker>YM=F</Ticker>
+        </Future>
+        <Future>
+            <Name>Nasdaq 100</Name>
+            <Ticker>NQ=F</Ticker>
+        </Future>
+        <Future>
+            <Name>E-mini Russell 2000</Name>
+            <Ticker>RTY=F</Ticker>
+        </Future>
+        <!-- Removed duplicate RTY=F -->
+        <Etf>
+            <Name>SPDR SP 500</Name>
+            <Ticker>SPY</Ticker>
+        </Etf>
+        <Etf>
+            <Name>Invesco QQQ Trust</Name>
+            <Ticker>QQQ</Ticker>
+        </Etf>
+        <Etf>
+            <Name>iShares Russell 2000 ETF</Name>
+            <Ticker>IWM</Ticker>
+        </Etf>
+        <Etf>
+            <Name>The Consumer Staples Select Sector SPDR Fund</Name>
+            <Ticker>XLP</Ticker>
+        </Etf>
+        <Etf>
+            <Name>The Consumer Discretionary Select Sector SPDR Fund</Name>
+            <Ticker>XLY</Ticker>
+        </Etf>
+        <Etf>
+            <Name>The Communication Services Select Sector SPDR Fund</Name>
+            <Ticker>XLC</Ticker>
+            <!-- Corrected ticker from XLV (Health Care) to XLC -->
+        </Etf>
+        <Etf>
+            <Name>The Industrial Select Sector SPDR Fund</Name>
+            <Ticker>XLI</Ticker>
+        </Etf>
+        <Etf>
+            <Name>The Technology Select Sector SPDR Fund</Name>
+            <Ticker>XLK</Ticker>
+            <!-- Corrected ticker from XLE (Energy) to XLK, added Name -->
+        </Etf>
+        <Etf>
+            <Name>The Financial Select Sector SPDR Fund</Name>
+            <Ticker>XLF</Ticker>
+        </Etf>
+        <Etf>
+            <Name>The Real Estate Select Sector SPDR Fund</Name>
+            <Ticker>XLRE</Ticker>
+        </Etf>
+        <Etf>
+            <Name>The Utilities Select Sector SPDR Fund</Name>
+            <Ticker>XLU</Ticker>
+        </Etf>
+        <Etf>
+            <Name>Schwab U.S. Broad Market ETF</Name>
+            <Ticker>SCHB</Ticker>
+        </Etf>
+        <Index>
+            <Name>Dow Jones Industrial Average</Name>
+            <Ticker>^DJI</Ticker>
+        </Index>
+        <Index>
+            <Name>Russell 2000 Index</Name>
+            <Ticker>^RUT</Ticker>
+        </Index>
+        <Index>
+            <Name>FTSE 100</Name>
+            <Ticker>^FTSE</Ticker>
+        </Index>
+        <Index>
+            <Name>DAX</Name>
+            <Ticker>^GDAXI</Ticker>
+            <!-- Removed duplicate DAX -->
+        </Index>
+        <Index>
+            <Name>CAC 40</Name>
+            <Ticker>^FCHI</Ticker>
+        </Index>
+        <Index>
+            <Name>EURO STOXX 50</Name>
+            <Ticker>^STOXX50E</Ticker>
+        </Index>
+    </AssetClass>
+
+    <!-- Fixed Income: Treasury futures and bond ETFs -->
+    <AssetClass name="Fixed Income">
+        <Future>
+            <Name>US Treasury Bond Futures</Name>
+            <Ticker>ZB=F</Ticker>
+        </Future>
+        <Future>
+            <Name>10-Year T-Note Futures</Name>
+            <Ticker>ZN=F</Ticker>
+            <!-- Removed duplicates ZN=F -->
+        </Future>
+        <Future>
+            <Name>5-Year T-Note Futures</Name>
+            <Ticker>ZF=F</Ticker>
+        </Future>
+        <Future>
+            <Name>2-Year T-Note Futures</Name>
+            <Ticker>ZT=F</Ticker>
+        </Future>
+        <Etf>
+            <Name>Vanguard Extended Duration Treasury Index Fund ETF</Name>
+            <Ticker>EDV</Ticker>
+        </Etf>
+        <Etf>
+            <Name>iShares 20+ Year Treasury Bond ETF</Name>
+            <Ticker>TLT</Ticker>
+        </Etf>
+        <Etf>
+            <Name>iShares iBoxx $ High Yield Corporate Bond ETF</Name>
+            <Ticker>HYG</Ticker>
+        </Etf>
+        <Etf>
+            <Name>iShares iBoxx $ Investment Grade Corporate Bond ETF</Name>
+            <Ticker>LQD</Ticker>
+        </Etf>
+    </AssetClass>
+
+    <!-- Currencies: FX pairs and US Dollar Index -->
+    <AssetClass name="Currencies">
+        <Fx>
+            <Name>EUR/USD</Name>
+            <Ticker>EURUSD=X</Ticker>
+        </Fx>
+        <Fx>
+            <Name>USD/JPY</Name>
+            <Ticker>JPY=X</Ticker>
+        </Fx>
+        <Fx>
+            <Name>GBP/USD</Name>
+            <Ticker>GBPUSD=X</Ticker>
+        </Fx>
+        <Fx>
+            <Name>EUR/GBP</Name>
+            <Ticker>EURGBP=X</Ticker>
+        </Fx>
+        <Fx>
+            <Name>USD/CNY</Name>
+            <Ticker>CNY=X</Ticker>
+        </Fx>
+        <Fx>
+            <Name>EUR/CHF</Name>
+            <Ticker>EURCHF=X</Ticker>
+        </Fx>
+        <Index>
+            <Name>US Dollar Index</Name>
+            <Ticker>DX-Y.NYB</Ticker>
+        </Index>
+    </AssetClass>
+
+    <!-- Volatility: Volatility indices -->
+    <AssetClass name="Volatility">
+        <Index>
+            <Name>CBOE Volatility Index</Name>
+            <Ticker>^VIX</Ticker>
+        </Index>
+    </AssetClass>
+</Assets>
