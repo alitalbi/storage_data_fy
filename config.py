@@ -1,7 +1,12 @@
 #Configuration for repo git connection
+import os
+import dotenv
 
-repo_name = ""
-local_repo_path = ""
-token = ""
-tickers = ""
-branch = "main"
+dotenv.load_dotenv()
+cwd = os.getcwd()
+repo_name = "alitalbi/storage_data_fy"
+local_repo_path = "C:Users\Administrateur\storage_data_fy"
+token = os.getenv("GIT_TOKEN")
+branch = "master"
+yahoo_interval = "1h"
+xml_file_path = os.path.join(cwd,"assets.xml")
