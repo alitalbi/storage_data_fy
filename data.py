@@ -139,7 +139,7 @@ def process_assets():
             if git_df is not None:
                 # Ensure index is datetime and timezone-free
                 git_df["Date"] = pd.to_datetime(git_df["Date"])
-                git_df.set_index("Date", inplace=True)
+               #git_df.set_index("Date", inplace=True)
                 git_df.index = git_df.index.tz_localize(None)
 
                 # Compare data
@@ -175,8 +175,11 @@ def push_data_git(updates):
     for ticker, df in updates:
         try:
             # Save DataFrame to CSV string
+            df.reset_index(inplace=True)
+            df.columns = ["Date", "Close", "High", "Low", "Open", "Volume"]
+
             csv_buffer = StringIO()
-            df.to_csv(csv_buffer, index=True, index_label="Date")
+            df.to_csv(csv_buffer, index=False)
             csv_content = csv_buffer.getvalue()
 
             # Check if file exists in repo
