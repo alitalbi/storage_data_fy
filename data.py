@@ -63,7 +63,7 @@ def read_csv_git(repo, file_path):
         file_content = repo.get_contents(file_path, ref=branch)
         decoded_content = base64.b64decode(file_content.content)
         string_content = StringIO(decoded_content.decode("utf-8"))
-        df = pd.read_csv(string_content,skiprows=2)
+        df = pd.read_csv(string_content)
         df.columns = ["Date","Close","High","Low","Open","Volume"]
         return df
     except Exception as e:
