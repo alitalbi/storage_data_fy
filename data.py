@@ -8,7 +8,7 @@ import base64
 from io import StringIO
 from config import repo_name, local_repo_path, token, branch, xml_file_path, yahoo_interval
 from git import Repo  # Requires 'GitPython' package: pip install GitPython
-
+from datetime import datetime
 
 def git_connect(token, repo_name):
     """
@@ -45,6 +45,7 @@ def check_update():
         remote_commit = origin.refs[branch].commit.hexsha
 
         is_up_to_date = local_commit == remote_commit
+
         return is_up_to_date, local_commit, remote_commit
     except Exception as e:
         print(f"Error checking repo update: {e}")
@@ -71,7 +72,7 @@ def read_csv_git(repo, file_path):
         return None
 
 
-def get_data(ticker):
+def get_data(ticker,mode,start):
     """
     Download hourly data for a ticker from Yahoo Finance.
     Args:
@@ -79,16 +80,35 @@ def get_data(ticker):
     Returns: pandas DataFrame with hourly data or None if download fails.
     """
     try:
-        data = yf.download(ticker, interval=yahoo_interval, progress=False)
-        if data.empty:
-            print(f"No data retrieved for {ticker}")
-            return None
-        return data
+        if mode == "latest_check":
+            data = yf.download(ticker, period="5d",interval=yahoo_interval, progress=False)
+            if data.empty:
+                print(f"No data retrieved for {ticker}")
+                return None
+            return data
+        elif mode == "append":
+            data = yf.download(ticker, start=start, interval=yahoo_interval, progress=False)
+            if data.empty:
+                print(f"No data retrieved for {ticker}")
+                return None
+            return data
+        elif mode == "update":
+            data = yf.download(ticker, interval=yahoo_interval, progress=False)
+            if data.empty:
+                print(f"No data retrieved for {ticker}")
+                return None
+            return data
     except Exception as e:
         print(f"Error downloading data for {ticker}: {e}")
         return None
 
+def reformat_data_yf(data):
 
+    data.reset_index(inplace=True)
+    data.columns = ["Date","Close","High","Low","Open","Volume"]
+    data["Date"] = data["Date"].apply(lambda x:datetime.strftime(x, "%Y-%m-%d"))
+
+    return data
 def process_assets():
     """
     Read XML, compare with GitHub CSV files, download missing/outdated data.
@@ -126,34 +146,44 @@ def process_assets():
     updates_needed = []
     for ticker in tickers:
         csv_file = f"{ticker}.csv"
-        latest_data = get_data(ticker)
+        latest_data = get_data(ticker, mode="latest_check", start=None)
+
         if latest_data is None:
             continue  # Skip if Yahoo Finance data unavailable
+        latest_date_yf = datetime.strftime(latest_data.index[-1],"%Y-%m-%d")
 
-        # Ensure consistent datetime index
-        latest_data.index = latest_data.index.tz_localize(None)  # Remove timezone
 
         if csv_file in git_files:
             # Read existing CSV from GitHub
             git_df = read_csv_git(repo, csv_file)
             if git_df is not None:
-                # Ensure index is datetime and timezone-free
-                git_df["Date"] = pd.to_datetime(git_df["Date"])
-               #git_df.set_index("Date", inplace=True)
-                git_df.index = git_df.index.tz_localize(None)
-
-                # Compare data
-                if not git_df.equals(latest_data):
-                    print(f"Data for {ticker} is outdated. Marking for update.")
-                    updates_needed.append((ticker, latest_data))
-                else:
+                # Ensure index is datetime
+                latest_date_git = git_df.Date.iloc[-1]
+                # Check for update of differential of period
+                if latest_date_yf == latest_date_git:
                     print(f"Data for {ticker} is up-to-date.")
+                else:
+                    print(f"Data for {ticker} is outdated. Marking for update.")
+                    latest_data = get_data(ticker, mode="append", start=latest_date_git)
+                    latest_data = reformat_data_yf(latest_data)
+                    final_data = pd.concat([git_df, latest_data], axis=0)
+                    final_data.drop_duplicates(subset="Date",inplace=True)
+                    final_data.reset_index(inplace=True,drop=True)
+                    updates_needed.append((ticker, final_data))
+                #git_df["Date"] = pd.to_datetime(git_df["Date"])
             else:
                 print(f"Failed to read {csv_file}. Downloading new data.")
-                updates_needed.append((ticker, latest_data))
+                full_data = get_data(ticker, mode="update", start=None)
+                full_data = reformat_data_yf(full_data)
+                full_data.reset_index(inplace=True, drop=True)
+                updates_needed.append((ticker, full_data))
+
+        #If csv not in git then add the file to git
         else:
+            full_data = get_data(ticker, mode="update", start=None)
             print(f"No CSV for {ticker}. Downloading new data.")
-            updates_needed.append((ticker, latest_data))
+            updates_needed.append((ticker, full_data))
+
 
     return updates_needed
 
@@ -174,10 +204,6 @@ def push_data_git(updates):
 
     for ticker, df in updates:
         try:
-            # Save DataFrame to CSV string
-            df.reset_index(inplace=True)
-            df.columns = ["Date", "Close", "High", "Low", "Open", "Volume"]
-
             csv_buffer = StringIO()
             df.to_csv(csv_buffer, index=False)
             csv_content = csv_buffer.getvalue()
@@ -205,7 +231,7 @@ def push_data_git(updates):
                 )
                 print(f"Created {csv_file} in GitHub.")
         except Exception as e:
-            print(f"Error pushing {csv_file} to GitHub: {e}")
+            print(f"Error pushing {ticker} to GitHub: {e}")
 
 
 if __name__ == "__main__":
