@@ -7,6 +7,10 @@
             <Ticker>GC=F</Ticker>
         </Future>
         <Future>
+            <Name>Gold</Name>
+            <Ticker>ZW=F</Ticker>
+        </Future>
+        <Future>
             <Name>Silver</Name>
             <Ticker>SI=F</Ticker>
         </Future>
