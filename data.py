@@ -181,6 +181,7 @@ def process_assets():
         #If csv not in git then add the file to git
         else:
             full_data = get_data(ticker, mode="update", start=None)
+            full_data.reset_index(inplace=True)
             print(f"No CSV for {ticker}. Downloading new data.")
             print(full_data)
             updates_needed.append((ticker, full_data))
