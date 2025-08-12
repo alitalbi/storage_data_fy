@@ -182,6 +182,7 @@ def process_assets():
         else:
             full_data = get_data(ticker, mode="update", start=None)
             print(f"No CSV for {ticker}. Downloading new data.")
+            full_data.reset_index(inplace=True)
             updates_needed.append((ticker, full_data))
 
 
