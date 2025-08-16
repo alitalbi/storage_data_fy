@@ -168,6 +168,14 @@
             <Name>2-Year T-Note Futures</Name>
             <Ticker>ZT=F</Ticker>
         </Future>
+        <Future>
+            <Name>2-Year T-Note US yield Future</Name>
+            <Ticker>2YY=F</Ticker>
+        </Future>
+        <Future>
+            <Name>5-Year US yield</Name>
+            <Ticker>^FVX</Ticker>
+        </Future>
         <Etf>
             <Name>Vanguard Extended Duration Treasury Index Fund ETF</Name>
             <Ticker>EDV</Ticker>
