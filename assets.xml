@@ -77,6 +77,10 @@
             <Ticker>SPY</Ticker>
         </Etf>
         <Etf>
+            <Name>IShares MSCI World</Name>
+            <Ticker>URTH</Ticker>
+        </Etf>
+        <Etf>
             <Name>Invesco QQQ Trust</Name>
             <Ticker>QQQ</Ticker>
         </Etf>
@@ -147,6 +151,7 @@
             <Name>EURO STOXX 50</Name>
             <Ticker>^STOXX50E</Ticker>
         </Index>
+
     </AssetClass>
 
     <!-- Fixed Income: Treasury futures and bond ETFs -->
