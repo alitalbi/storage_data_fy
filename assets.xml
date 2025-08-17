@@ -161,6 +161,10 @@
             <Name>EURO STOXX 50</Name>
             <Ticker>^STOXX50E</Ticker>
         </Index>
+        <Index>
+            <Name>EURO STOXX 600</Name>
+            <Ticker>^STOXX</Ticker>
+        </Index>
 
     </AssetClass>
 
@@ -200,6 +204,14 @@
             <Ticker>TLT</Ticker>
         </Etf>
         <Etf>
+            <Name>iShares IG Corp EUR Bond ETF</Name>
+            <Ticker>IEAC</Ticker>
+        </Etf>
+        <Etf>
+            <Name>iShares HY Corp Bond ETF</Name>
+            <Ticker>IHYG</Ticker>
+        </Etf>
+        <Etf>
             <Name>iShares iBoxx $ High Yield Corporate Bond ETF</Name>
             <Ticker>HYG</Ticker>
         </Etf>
@@ -214,6 +226,10 @@
         <Fx>
             <Name>EUR/USD</Name>
             <Ticker>EURUSD=X</Ticker>
+        </Fx>
+        <Fx>
+            <Name>EUR/JPY</Name>
+            <Ticker>EURJPY=X</Ticker>
         </Fx>
         <Fx>
             <Name>USD/JPY</Name>
