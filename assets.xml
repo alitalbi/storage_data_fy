@@ -111,6 +111,16 @@
             <!-- Corrected ticker from XLE (Energy) to XLK, added Name -->
         </Etf>
         <Etf>
+            <Name>Communication Services Select  Sector SPDR Fund</Name>
+            <Ticker>XLB</Ticker>
+            <!-- Corrected ticker from XLE (Energy) to XLK, added Name -->
+        </Etf>
+        <Etf>
+            <Name>Energy Select Sector SPDR Fund</Name>
+            <Ticker>XLE</Ticker>
+            <!-- Corrected ticker from XLE (Energy) to XLK, added Name -->
+        </Etf>
+        <Etf>
             <Name>The Financial Select Sector SPDR Fund</Name>
             <Ticker>XLF</Ticker>
         </Etf>

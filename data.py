@@ -93,7 +93,7 @@ def get_data(ticker,mode,start):
                 return None
             return data
         elif mode == "update":
-            data = yf.download(ticker, interval=yahoo_interval, progress=False)
+            data = yf.download(ticker, interval=yahoo_interval, start="2001-01-01",progress=False)
             if data.empty:
                 print(f"No data retrieved for {ticker}")
                 return None
@@ -181,7 +181,8 @@ def process_assets():
         #If csv not in git then add the file to git
         else:
             full_data = get_data(ticker, mode="update", start=None)
-            full_data.reset_index(inplace=True)
+            full_data = reformat_data_yf(full_data)
+            full_data.reset_index(inplace=True, drop=True)
             print(f"No CSV for {ticker}. Downloading new data.")
             print(full_data)
             updates_needed.append((ticker, full_data))
