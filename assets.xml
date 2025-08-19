@@ -102,6 +102,10 @@
             <!-- Corrected ticker from XLV (Health Care) to XLC -->
         </Etf>
         <Etf>
+            <Name>Health Care Select Sector SPDR Fund</Name>
+            <Ticker>XLV</Ticker>
+        </Etf>
+        <Etf>
             <Name>The Industrial Select Sector SPDR Fund</Name>
             <Ticker>XLI</Ticker>
         </Etf>

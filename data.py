@@ -79,6 +79,8 @@ def get_data(ticker,mode,start):
         ticker: String, e.g., 'GC=F'.
     Returns: pandas DataFrame with hourly data or None if download fails.
     """
+    if ticker in ["IEAC", "IHYG"]:
+        ticker += ".L"
     try:
         if mode == "latest_check":
             data = yf.download(ticker, period="5d",interval=yahoo_interval, progress=False)
@@ -145,6 +147,7 @@ def process_assets():
 
     updates_needed = []
     for ticker in tickers:
+
         csv_file = f"{ticker}.csv"
         latest_data = get_data(ticker, mode="latest_check", start=None)
 
